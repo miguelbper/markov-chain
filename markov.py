@@ -25,7 +25,7 @@ Typical usage examples:
         [0, 0, 3, 0, 1],
         [0, 0, 0, 4, 0],
     ])/4
-    # use the function absorbing to compute relevant quantities
+    # use the function ergodic to compute relevant quantities
     w, r, Z, M = ergodic(P)
 
 '''
