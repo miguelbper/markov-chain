@@ -16,8 +16,8 @@ The function `absorbing` computes the matrices/vectors $\mathbf{N}$, $\mathbf{t}
 
 $$
     \begin{array}{rcl}
-        N_{ij} & = & E(\text{\# times in $j$, given start in $i$}), \\
-        t_{i}  & = & E(\text{\# steps until absorption, given start in $i$}), \\
+        N_{ij} & = & E(\text{number of times in $j$, given start in $i$}), \\
+        t_{i}  & = & E(\text{number of steps until absorption, given start in $i$}), \\
         B_{ij} & = & P(\text{absorption in $j$, given start in $i$}).
     \end{array}
 $$
@@ -41,8 +41,8 @@ Let $\mathbf{P}$ be the transition matrix of an ergodic Markov chain. The functi
 
 $$
     \begin{array}{rcl}
-        w_{i}      & = & E(\text{\# times in $i$}), \\
-        r_{i}      & = & E(\text{\# steps to go from $i$ back to $i$}), \\
+        w_{i}      & = & E(\text{number of times in $i$}), \\
+        r_{i}      & = & E(\text{number of steps to go from $i$ back to $i$}), \\
         \textbf{Z} & = & (\mathbf{I} - \mathbf{P} + \mathbf{W})^{-1}, \quad \text{where $\mathbf{W} = $ matrix where every row is $\mathbf{w}$}, \\
         M_{ij}     & = & E(\text{\# steps to go from $i$ to $j$}).
     \end{array}
