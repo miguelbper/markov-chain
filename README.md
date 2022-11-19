@@ -3,6 +3,7 @@ A module offering functions which solve questions about absorbing or ergodic Mar
 
 ## Example for an absorbing Markov chain
 Let $\mathbf{P}$ be the transition matrix of an absorbing Markov chain, written in canonical form:
+
 $$
     \mathbf{P} = 
     \begin{bmatrix}
@@ -10,7 +11,9 @@ $$
         \mathbf{0} & \mathbf{I} \\
     \end{bmatrix}.
 $$
+
 The function `absorbing` computes the matrices/vectors $\mathbf{N}$, $\mathbf{t}$, $\mathbf{B}$, which are defined by
+
 $$
     \begin{array}{rcl}
         N_{ij} & = & E(\text{\# times in $j$, given start in $i$}), \\
@@ -18,6 +21,7 @@ $$
         B_{ij} & = & P(\text{absorption in $j$, given start in $i$}).
     \end{array}
 $$
+
 Example usage:
 ```python
 # define the transition matrix, in canonical form
@@ -34,6 +38,7 @@ N, t, B = absorbing(P)
 
 ## Example for an ergodic Markov chain
 Let $\mathbf{P}$ be the transition matrix of an ergodic Markov chain. The function `ergodic` computes the matrices/vectors $\mathbf{w}$, $\mathbf{r}$, $\mathbf{Z}$, $\mathbf{M}$, which are defined by
+
 $$
     \begin{array}{rcl}
         w_{i}      & = & E(\text{\# times in $i$}), \\
@@ -42,6 +47,7 @@ $$
         M_{ij}     & = & E(\text{\# steps to go from $i$ to $j$}).
     \end{array}
 $$
+
 Example usage:
 ```python
 # define the transition matrix
