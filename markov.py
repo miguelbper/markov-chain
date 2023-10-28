@@ -31,13 +31,7 @@ Typical usage examples:
 '''
 
 import numpy as np
-from numpy.linalg import inv
-from scipy.sparse.linalg import spsolve
-from scipy.sparse import csc_matrix
-from itertools import repeat
-
-
-Matrix = np.ndarray
+from sympy import Matrix, eye, ones, zeros
 
 
 def absorbing(P: Matrix) -> tuple[Matrix, Matrix, Matrix]:
@@ -65,23 +59,32 @@ def absorbing(P: Matrix) -> tuple[Matrix, Matrix, Matrix]:
             Thm. B = N R.
     
     '''
-    n = len(P)
+    n, _ = P.shape
+
+    print(P)
 
     # compute k = number of transient states
-    J = np.eye(n)
-    k = n-1
-    while np.array_equal(P[k], J[k]):
+    J = eye(n)
+    print(J)
+    k = n - 1
+    while P[k, :] == J[k, :]:
+        print(P[k, :])
+        print(J[k, :])
         k -= 1
     k += 1
 
     # auxiliary matrices
-    c = np.ones((k, 1))
-    I = np.eye(k)
+    c = ones(k, 1)
+    I = eye(k)
     Q = P[:k, :k]
     R = P[:k, k:]
     
+    print(I)
+    print(Q)
+    print(I - Q)
+
     # compute N, t, B
-    N = inv(I - Q)
+    N = (I - Q).inv()
     t = N @ c
     B = N @ R
 
@@ -116,18 +119,18 @@ def ergodic(P: Matrix) -> tuple[Matrix, Matrix, Matrix, Matrix]:
             Thm. M = (diag(Z) - Z) / w    (broadcasting in this eq.)
         
     '''
-    n = len(P)
-    I = np.eye(n)
+    n, _ = P.shape
+    I = eye(n)
 
     # compute fixed vector w, using w P = w and sum(w) = 1.
-    A = np.concatenate((np.ones((1, n)), (P.T - I)[1:]))
-    b = np.concatenate((np.ones((1, 1)), np.zeros((n-1, 1))))
-    w = spsolve(csc_matrix(A), b)
-    W = np.row_stack(repeat(w, n))
+    A = ones(1, n).col_join((P.T - I)[1:, :])
+    b = ones(1, 1).col_join(zeros(n - 1, 1))
+    w = (A.inv() @ b).T
+    W = ones(n, 1) @ w
 
     # compute r, Z, M
-    r = 1/w
-    Z = inv(I - P + W)
-    M = (np.diag(Z) - Z) / w
+    r = Matrix([[1/w[0, i] for i in range(n)]])
+    Z = (I - P + W).inv()
+    M = Matrix([[(Z[j,j] - Z[i,j])/w[0,j] for j in range(n)] for i in range(n)])
 
     return w, r, Z, M

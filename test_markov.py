@@ -1,81 +1,89 @@
-import numpy as np
+# import numpy as np
+from sympy import Matrix, Rational
 from markov import absorbing, ergodic
+import pytest
 
 
 class TestAbsorbing():
     def test_drunkard_walk_4(self):
         # input
-        P = np.array([[ 0, .5,  0, .5,  0],
-                      [.5,  0, .5,  0,  0],
-                      [ 0, .5,  0,  0, .5],
-                      [ 0,  0,  0,  1,  0],
-                      [ 0,  0,  0,  0,  1]])
+        P = Matrix([
+            [0, 1, 0, 1, 0],
+            [1, 0, 1, 0, 0],
+            [0, 1, 0, 0, 1],
+            [0, 0, 0, 2, 0],
+            [0, 0, 0, 0, 2],
+        ])/2
         
         # output
-        N = np.array([[1.5, 1,  .5],
-                      [  1, 2,   1],
-                      [ .5, 1, 1.5]])
-        t = np.array([[3, 4, 3]]).T
-        B = np.array([[.75, .25],
-                      [ .5,  .5],
-                      [.25, .75]])
+        N = Matrix([
+            [3, 2, 1],
+            [2, 4, 2],
+            [1, 2, 3],
+        ])/2
+        t = Matrix([[3, 4, 3]]).T
+        B = Matrix([
+            [3, 1],
+            [2, 2],
+            [1, 3],
+        ])/4
         
         # predictions
         N_, t_, B_ = absorbing(P)
-        assert np.allclose(N, N_) and np.allclose(t, t_) and np.allclose(B, B_)
+        assert N == N_ and t == t_ and B == B_
 
 
     def test_drunkard_walk_5(self):
         # input
-        P = np.array([
-            [ 0, .5,  0,  0, .5,  0],
-            [.5,  0, .5,  0,  0,  0],
-            [ 0, .5,  0, .5,  0,  0],
-            [ 0,  0, .5,  0,  0, .5],
-            [ 0,  0,  0,  0,  1,  0],
-            [ 0,  0,  0,  0,  0,  1],
-        ])
+        P = Matrix([
+            [0, 1, 0, 0, 1, 0],
+            [1, 0, 1, 0, 0, 0],
+            [0, 1, 0, 1, 0, 0],
+            [0, 0, 1, 0, 0, 1],
+            [0, 0, 0, 0, 2, 0],
+            [0, 0, 0, 0, 0, 2],
+        ])/2
         
         # output
-        N = np.array([
-            [1.6, 1.2,  .8,  .4],
-            [1.2, 2.4, 1.6,  .8],
-            [ .8, 1.6, 2.4, 1.2],
-            [ .4,  .8, 1.2, 1.6],
-        ])
-        t = np.array([[4, 6, 6, 4]]).T
-        B = np.array([
-            [.8, .2],
-            [.6, .4],
-            [.4, .6],
-            [.2, .8],
-        ])
+        N = Matrix([
+            [16, 12,  8,  4],
+            [12, 24, 16,  8],
+            [ 8, 16, 24, 12],
+            [ 4,  8, 12, 16],
+        ])/10
+        t = Matrix([[4, 6, 6, 4]]).T
+        B = Matrix([
+            [8, 2],
+            [6, 4],
+            [4, 6],
+            [2, 8],
+        ])/10
         
         # predictions
         N_, t_, B_ = absorbing(P)
-        assert np.allclose(N, N_) and np.allclose(t, t_) and np.allclose(B, B_)
+        assert N == N_ and t == t_ and B == B_
 
 
 class TestErgodic():
     def test_land_of_oz(self):
         # input
-        P = np.array([
+        P = Matrix([
             [2, 1, 1],
             [2, 0, 2],
             [1, 1, 2],
         ]) / 4
         
         # output
-        w = np.array([.4, .2, .4])
+        w = Matrix([[4, 2, 4]])/10
         
         # predictions
         w_, _, _, _ = ergodic(P)
-        assert np.allclose(w, w_)
+        assert w == w_
 
 
     def test_ehrenfest(self):
         # input
-        P = np.array([
+        P = Matrix([
             [0, 4, 0, 0, 0],
             [1, 0, 3, 0, 0],
             [0, 2, 0, 2, 0],
@@ -84,9 +92,9 @@ class TestErgodic():
         ])/4
 
         # output
-        w = np.array([.0625, .25, .375, .25, .0625])
-        r = np.array([16, 4, 8/3, 4, 16])
-        M = np.array([
+        w = Matrix([[1, 4, 6, 4, 1]])/16
+        r = Matrix([[16, 4, Rational(8, 3), 4, 16]])
+        M = Matrix([
             [ 0,  3, 8, 19, 64],
             [45,  0, 5, 16, 61],
             [56, 11, 0, 11, 56],
@@ -96,4 +104,4 @@ class TestErgodic():
 
         # predictions
         w_, r_, _, M_ = ergodic(P)
-        assert np.allclose(w, w_) and np.allclose(r, r_) and np.allclose(M, M_)
+        assert w == w_ and r == r_ and M == M_
