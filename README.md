@@ -25,13 +25,13 @@ $$
 Example usage:
 ```python
 # define the transition matrix, in canonical form
-P = np.array([
-    [ 0, .5,  0, .5,  0],
-    [.5,  0, .5,  0,  0],
-    [ 0, .5,  0,  0, .5],
-    [ 0,  0,  0,  1,  0],
-    [ 0,  0,  0,  0,  1],
-])
+P = Matrix([
+    [0, 1, 0, 1, 0],
+    [1, 0, 1, 0, 0],
+    [0, 1, 0, 0, 1],
+    [0, 0, 0, 2, 0],
+    [0, 0, 0, 0, 2],
+])/2
 # use the function absorbing to compute relevant quantities
 N, t, B = absorbing(P)
 ```
@@ -51,7 +51,7 @@ $$
 Example usage:
 ```python
 # define the transition matrix
-P = np.array([
+P = Matrix([
     [0, 4, 0, 0, 0],
     [1, 0, 3, 0, 0],
     [0, 2, 0, 2, 0],

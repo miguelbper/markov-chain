@@ -6,19 +6,19 @@ Typical usage examples:
 
 1. absorbing Markov chain:
     # define the transition matrix, in canonical form
-    P = np.array([
-        [ 0, .5,  0, .5,  0],
-        [.5,  0, .5,  0,  0],
-        [ 0, .5,  0,  0, .5],
-        [ 0,  0,  0,  1,  0],
-        [ 0,  0,  0,  0,  1],
-    ])
+    P = Matrix([
+        [0, 1, 0, 1, 0],
+        [1, 0, 1, 0, 0],
+        [0, 1, 0, 0, 1],
+        [0, 0, 0, 2, 0],
+        [0, 0, 0, 0, 2],
+    ])/2
     # use the function absorbing to compute relevant quantities
     N, t, B = absorbing(P)
     
 2. ergodic Markov chain:
     # define the transition matrix
-    P = np.array([
+    P = Matrix([
         [0, 4, 0, 0, 0],
         [1, 0, 3, 0, 0],
         [0, 2, 0, 2, 0],
@@ -27,10 +27,8 @@ Typical usage examples:
     ])/4
     # use the function ergodic to compute relevant quantities
     w, r, Z, M = ergodic(P)
-
 '''
 
-import numpy as np
 from sympy import Matrix, eye, ones, zeros
 
 
@@ -61,15 +59,10 @@ def absorbing(P: Matrix) -> tuple[Matrix, Matrix, Matrix]:
     '''
     n, _ = P.shape
 
-    print(P)
-
     # compute k = number of transient states
     J = eye(n)
-    print(J)
     k = n - 1
     while P[k, :] == J[k, :]:
-        print(P[k, :])
-        print(J[k, :])
         k -= 1
     k += 1
 
@@ -79,10 +72,6 @@ def absorbing(P: Matrix) -> tuple[Matrix, Matrix, Matrix]:
     Q = P[:k, :k]
     R = P[:k, k:]
     
-    print(I)
-    print(Q)
-    print(I - Q)
-
     # compute N, t, B
     N = (I - Q).inv()
     t = N @ c
