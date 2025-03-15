@@ -1,6 +1,6 @@
 # import numpy as np
 from sympy import Matrix, Rational
-from markov import absorbing, ergodic
+from src.markov import absorbing, ergodic
 import pytest
 
 
@@ -14,7 +14,7 @@ class TestAbsorbing():
             [0, 0, 0, 2, 0],
             [0, 0, 0, 0, 2],
         ])/2
-        
+
         # output
         N = Matrix([
             [3, 2, 1],
@@ -27,7 +27,7 @@ class TestAbsorbing():
             [2, 2],
             [1, 3],
         ])/4
-        
+
         # predictions
         N_, t_, B_ = absorbing(P)
         assert N == N_ and t == t_ and B == B_
@@ -43,7 +43,7 @@ class TestAbsorbing():
             [0, 0, 0, 0, 2, 0],
             [0, 0, 0, 0, 0, 2],
         ])/2
-        
+
         # output
         N = Matrix([
             [16, 12,  8,  4],
@@ -58,7 +58,7 @@ class TestAbsorbing():
             [4, 6],
             [2, 8],
         ])/10
-        
+
         # predictions
         N_, t_, B_ = absorbing(P)
         assert N == N_ and t == t_ and B == B_
@@ -72,10 +72,10 @@ class TestErgodic():
             [2, 0, 2],
             [1, 1, 2],
         ]) / 4
-        
+
         # output
         w = Matrix([[4, 2, 4]])/10
-        
+
         # predictions
         w_, _, _, _ = ergodic(P)
         assert w == w_
