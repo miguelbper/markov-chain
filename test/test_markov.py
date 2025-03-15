@@ -1,11 +1,11 @@
-# import numpy as np
 from sympy import Matrix, Rational
+
 from markov import absorbing, ergodic
-import pytest
 
 
-class TestAbsorbing():
+class TestAbsorbing:
     def test_drunkard_walk_4(self):
+        # fmt: off
         # input
         P = Matrix([
             [0, 1, 0, 1, 0],
@@ -14,7 +14,7 @@ class TestAbsorbing():
             [0, 0, 0, 2, 0],
             [0, 0, 0, 0, 2],
         ])/2
-        
+
         # output
         N = Matrix([
             [3, 2, 1],
@@ -27,13 +27,14 @@ class TestAbsorbing():
             [2, 2],
             [1, 3],
         ])/4
-        
+        # fmt: on
+
         # predictions
         N_, t_, B_ = absorbing(P)
         assert N == N_ and t == t_ and B == B_
 
-
     def test_drunkard_walk_5(self):
+        # fmt: off
         # input
         P = Matrix([
             [0, 1, 0, 0, 1, 0],
@@ -43,7 +44,7 @@ class TestAbsorbing():
             [0, 0, 0, 0, 2, 0],
             [0, 0, 0, 0, 0, 2],
         ])/2
-        
+
         # output
         N = Matrix([
             [16, 12,  8,  4],
@@ -58,30 +59,33 @@ class TestAbsorbing():
             [4, 6],
             [2, 8],
         ])/10
-        
+        # fmt: on
+
         # predictions
         N_, t_, B_ = absorbing(P)
         assert N == N_ and t == t_ and B == B_
 
 
-class TestErgodic():
+class TestErgodic:
     def test_land_of_oz(self):
+        # fmt: off
         # input
         P = Matrix([
             [2, 1, 1],
             [2, 0, 2],
             [1, 1, 2],
         ]) / 4
-        
+
         # output
         w = Matrix([[4, 2, 4]])/10
-        
+        # fmt: on
+
         # predictions
         w_, _, _, _ = ergodic(P)
         assert w == w_
 
-
     def test_ehrenfest(self):
+        # fmt: off
         # input
         P = Matrix([
             [0, 4, 0, 0, 0],
@@ -101,6 +105,7 @@ class TestErgodic():
             [61, 16, 5,  0, 45],
             [64, 19, 8,  3,  0],
         ])/3
+        # fmt: on
 
         # predictions
         w_, r_, _, M_ = ergodic(P)

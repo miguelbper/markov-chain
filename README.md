@@ -5,7 +5,7 @@ A module offering functions which solve questions about absorbing or ergodic Mar
 Let $\mathbf{P}$ be the transition matrix of an absorbing Markov chain, written in canonical form:
 
 $$
-    \mathbf{P} = 
+    \mathbf{P} =
     \begin{bmatrix}
         \mathbf{Q} & \mathbf{R} \\
         \mathbf{0} & \mathbf{I} \\
