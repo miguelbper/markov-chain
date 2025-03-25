@@ -33,7 +33,7 @@ Typical usage examples:
 from sympy import Matrix, eye, ones, zeros
 
 
-def absorbing(P: Matrix, verbose=False) -> tuple[Matrix, Matrix, Matrix]:
+def absorbing(P: Matrix, verbose: bool = False) -> tuple[Matrix, Matrix, Matrix]:
     """Given an absorbing Markov chain with transition matrix P, compute t
     (time to absorption), B (absorption probs), N (fundamental matrix)
 
@@ -141,7 +141,7 @@ def absorbing(P: Matrix, verbose=False) -> tuple[Matrix, Matrix, Matrix]:
     return N, t, B
 
 
-def ergodic(P: Matrix, verbose=False) -> tuple[Matrix, Matrix, Matrix, Matrix]:
+def ergodic(P: Matrix, verbose: bool = False) -> tuple[Matrix, Matrix, Matrix, Matrix]:
     """Given an ergodic Markov chain with transition matrix P, compute w (fixed
     vector), r (mean recurrence times), Z (fundamental matrix), and M (mean
     first passage times).
