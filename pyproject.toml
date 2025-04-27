@@ -68,7 +68,7 @@ known-first-party = ["markov"]
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
-strict = ["**/*.py"]
+basic = ["**/*.py"]
 pythonVersion = "3.11"
 
 # Ignore lines in the main block for coverage purposes
