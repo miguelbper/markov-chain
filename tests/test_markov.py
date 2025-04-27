@@ -1,10 +1,18 @@
+from typing import Any
+
+import pytest
 from sympy import Matrix, Rational
 
 from markov import absorbing, ergodic
 
 
+@pytest.fixture(params=[True, False])
+def verbose(request: Any) -> bool:
+    return request.param
+
+
 class TestAbsorbing:
-    def test_drunkard_walk_4(self):
+    def test_drunkard_walk_4(self, verbose: bool) -> None:
         # fmt: off
         # input
         P = Matrix([
@@ -30,10 +38,10 @@ class TestAbsorbing:
         # fmt: on
 
         # predictions
-        N_, t_, B_ = absorbing(P)
+        N_, t_, B_ = absorbing(P, verbose=verbose)
         assert N == N_ and t == t_ and B == B_
 
-    def test_drunkard_walk_5(self):
+    def test_drunkard_walk_5(self, verbose: bool) -> None:
         # fmt: off
         # input
         P = Matrix([
@@ -62,12 +70,12 @@ class TestAbsorbing:
         # fmt: on
 
         # predictions
-        N_, t_, B_ = absorbing(P)
+        N_, t_, B_ = absorbing(P, verbose=verbose)
         assert N == N_ and t == t_ and B == B_
 
 
 class TestErgodic:
-    def test_land_of_oz(self):
+    def test_land_of_oz(self, verbose: bool) -> None:
         # fmt: off
         # input
         P = Matrix([
@@ -81,10 +89,10 @@ class TestErgodic:
         # fmt: on
 
         # predictions
-        w_, _, _, _ = ergodic(P)
+        w_, _, _, _ = ergodic(P, verbose=verbose)
         assert w == w_
 
-    def test_ehrenfest(self):
+    def test_ehrenfest(self, verbose: bool) -> None:
         # fmt: off
         # input
         P = Matrix([
@@ -108,5 +116,5 @@ class TestErgodic:
         # fmt: on
 
         # predictions
-        w_, r_, _, M_ = ergodic(P)
+        w_, r_, _, M_ = ergodic(P, verbose=verbose)
         assert w == w_ and r == r_ and M == M_
