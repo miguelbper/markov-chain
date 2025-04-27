@@ -21,7 +21,7 @@ class TestAbsorbing:
             [2, 4, 2],
             [1, 2, 3],
         ])/2
-        t = Matrix([[3, 4, 3]]).T
+        t = Matrix([[3], [4], [3]])
         B = Matrix([
             [3, 1],
             [2, 2],
@@ -52,7 +52,7 @@ class TestAbsorbing:
             [ 8, 16, 24, 12],
             [ 4,  8, 12, 16],
         ])/10
-        t = Matrix([[4, 6, 6, 4]]).T
+        t = Matrix([[4], [6], [6], [4]])
         B = Matrix([
             [8, 2],
             [6, 4],
