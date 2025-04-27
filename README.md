@@ -1,4 +1,14 @@
+<div align="center">
+
 # Markov chain
+[![Python](https://img.shields.io/badge/Python-3776ab?logo=python&logoColor=white)](https://www.python.org/)
+[![Code Quality](https://github.com/miguelbper/markov-chain/actions/workflows/code-quality.yaml/badge.svg)](https://github.com/miguelbper/markov-chain/actions/workflows/code-quality.yaml)
+[![Unit Tests](https://github.com/miguelbper/markov-chain/actions/workflows/tests.yaml/badge.svg)](https://github.com/miguelbper/markov-chain/actions/workflows/tests.yaml)
+[![codecov](https://codecov.io/gh/miguelbper/markov-chain/graph/badge.svg)](https://codecov.io/gh/miguelbper/markov-chain)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray)](LICENSE)
+
+</div>
+
 A module offering functions which solve questions about absorbing or ergodic Markov chains. The implementation is based on the theorems from Grinstead and Snell - Introduction to Probability.
 
 ## Example for an absorbing Markov chain
