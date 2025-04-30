@@ -8,7 +8,7 @@ authors = [
     {name = "Miguel Pereira", email = "miguel.b.per@gmail.com"},
 ]
 dependencies = [
-    "sympy>=1.13.3",
+    "sympy>=1.14.0",
 ]
 
 [dependency-groups]
@@ -29,7 +29,7 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/markov"]
+packages = ["src/markov_chain"]
 
 # Version management using git tags
 [tool.hatch.version]
@@ -63,7 +63,7 @@ select = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["markov"]
+known-first-party = ["markov_chain"]
 
 [tool.pyright]
 venvPath = "."
