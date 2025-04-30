@@ -3,7 +3,7 @@ from typing import Any
 import pytest
 from sympy import Matrix, Rational
 
-from markov import absorbing, ergodic
+from markov_chain import absorbing, ergodic
 
 
 @pytest.fixture(params=[True, False])
