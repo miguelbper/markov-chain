@@ -3,7 +3,7 @@ name = "markov-chain"
 dynamic = ["version"]  # Version is managed by git tags
 description = "Solver for Markov chains"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 authors = [
     {name = "Miguel Pereira", email = "miguel.b.per@gmail.com"},
 ]
@@ -45,7 +45,7 @@ package = true
 # ------------------------------------------------------------------------------
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py39"
 line-length = 120
 ignore = [
     "E741",  # ambiguous variable name
@@ -69,7 +69,7 @@ known-first-party = ["markov"]
 venvPath = "."
 venv = ".venv"
 basic = ["**/*.py"]
-pythonVersion = "3.11"
+pythonVersion = "3.9"
 
 # Ignore lines in the main block for coverage purposes
 [tool.coverage.report]
